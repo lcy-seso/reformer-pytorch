@@ -2,6 +2,7 @@ from torch import nn
 from reformer_pytorch.reformer_pytorch import LSHAttention, LSHSelfAttention
 from collections import defaultdict
 
+
 class Recorder(nn.Module):
     def __init__(self, net):
         super().__init__()
@@ -40,7 +41,7 @@ class Recorder(nn.Module):
     def clear(self):
         del self.recordings
         self.recordings = defaultdict(list)
-        self.iter = 0        
+        self.iter = 0
 
     def record(self, attn, buckets):
         if not self.on: return

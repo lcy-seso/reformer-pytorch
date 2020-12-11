@@ -6,7 +6,8 @@ from torch.nn.utils.rnn import pad_sequence
 from reformer_pytorch.reformer_pytorch import ReformerLM
 from reformer_pytorch.autopadder import Autopadder
 
-def top_p(logits, thres = 0.9):
+
+def top_p(logits, thres=0.9):
     sorted_logits, sorted_indices = torch.sort(logits, descending=True)
     cum_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
 
@@ -17,17 +18,21 @@ def top_p(logits, thres = 0.9):
     sorted_logits[sorted_indices_to_remove] = float('-inf')
     return sorted_logits.scatter(1, sorted_indices, sorted_logits)
 
-def top_k(logits, thres = 0.9):
+
+def top_k(logits, thres=0.9):
     k = int((1 - thres) * logits.shape[-1])
     val, ind = torch.topk(logits, k)
     probs = torch.full_like(logits, float('-inf'))
     probs.scatter_(1, ind, val)
     return probs
 
+
 class TrainingWrapper(nn.Module):
-    def __init__(self, net, ignore_index = -100, pad_value = 0):
+    def __init__(self, net, ignore_index=-100, pad_value=0):
         super().__init__()
-        assert isinstance(net, ReformerLM), 'generative trainer wrapper can only accept ReformerLM class'
+        assert isinstance(
+            net, ReformerLM
+        ), 'generative trainer wrapper can only accept ReformerLM class'
         self.pad_value = pad_value
         self.ignore_index = ignore_index
 
@@ -35,7 +40,14 @@ class TrainingWrapper(nn.Module):
         self.max_seq_len = net.max_seq_len
 
     @torch.no_grad()
-    def generate(self, start_tokens, seq_len, eos_token = None, temperature = 1., filter_logits_fn = top_k, filter_thres = 0.9, **kwargs):
+    def generate(self,
+                 start_tokens,
+                 seq_len,
+                 eos_token=None,
+                 temperature=1.,
+                 filter_logits_fn=top_k,
+                 filter_thres=0.9,
+                 **kwargs):
         was_training = self.net.training
         num_dims = len(start_tokens.shape)
 
@@ -49,14 +61,15 @@ class TrainingWrapper(nn.Module):
         input_mask = kwargs.pop('input_mask', None)
 
         if input_mask is None:
-            input_mask = torch.full_like(out, True, dtype=torch.bool, device=out.device)
+            input_mask = torch.full_like(
+                out, True, dtype=torch.bool, device=out.device)
 
         for _ in range(seq_len):
             x = out[:, -self.max_seq_len:]
             input_mask = input_mask[:, -self.max_seq_len:]
 
             logits = self.net(x, input_mask=input_mask, **kwargs)[:, -1, :]
-            filtered_logits = filter_logits_fn(logits, thres = filter_thres)
+            filtered_logits = filter_logits_fn(logits, thres=filter_thres)
             probs = F.softmax(filtered_logits / temperature, dim=-1)
             sample = torch.multinomial(probs, 1)
 
@@ -74,8 +87,9 @@ class TrainingWrapper(nn.Module):
         self.net.train(was_training)
         return out
 
-    def forward(self, x, return_loss = False, **kwargs):
-        pad = partial(pad_sequence, batch_first = True, padding_value = self.pad_value)
+    def forward(self, x, return_loss=False, **kwargs):
+        pad = partial(
+            pad_sequence, batch_first=True, padding_value=self.pad_value)
 
         if not return_loss:
             if not isinstance(x, torch.Tensor):
@@ -91,5 +105,6 @@ class TrainingWrapper(nn.Module):
 
         out = self.net(xi, **kwargs)
 
-        loss = F.cross_entropy(out.transpose(1, 2), xo, ignore_index = self.ignore_index)
+        loss = F.cross_entropy(
+            out.transpose(1, 2), xo, ignore_index=self.ignore_index)
         return loss

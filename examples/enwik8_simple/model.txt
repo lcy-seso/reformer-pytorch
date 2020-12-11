@@ -1,0 +1,430 @@
+TrainingWrapper(
+  (net): Autopadder(
+    (net): ReformerLM(
+      (token_emb): Embedding(256, 512)
+      (to_model_dim): Identity()
+      (pos_emb): AxialPositionalEmbedding()
+      (reformer): Reformer(
+        (layers): ReversibleSequence(
+          (blocks): ModuleList(
+            (0): ReversibleBlock(
+              (f): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): LSHSelfAttention(
+                    (toqk): Linear(in_features=512, out_features=512, bias=False)
+                    (tov): Linear(in_features=512, out_features=512, bias=False)
+                    (to_out): Linear(in_features=512, out_features=512, bias=True)
+                    (lsh_attn): LSHAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                      (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                    )
+                    (full_attn): FullQKAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                    (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                    (local_attn): LocalAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                  )
+                )
+              )
+              (g): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): Chunk(
+                    (fn): FeedForward(
+                      (w1): Linear(in_features=512, out_features=2048, bias=True)
+                      (act): GELU()
+                      (dropout): Dropout(p=0.0, inplace=False)
+                      (w2): Linear(in_features=2048, out_features=512, bias=True)
+                    )
+                  )
+                )
+              )
+            )
+            (1): ReversibleBlock(
+              (f): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): LSHSelfAttention(
+                    (toqk): Linear(in_features=512, out_features=512, bias=False)
+                    (tov): Linear(in_features=512, out_features=512, bias=False)
+                    (to_out): Linear(in_features=512, out_features=512, bias=True)
+                    (lsh_attn): LSHAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                      (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                    )
+                    (full_attn): FullQKAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                    (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                    (local_attn): LocalAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                  )
+                )
+              )
+              (g): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): Chunk(
+                    (fn): FeedForward(
+                      (w1): Linear(in_features=512, out_features=2048, bias=True)
+                      (act): GELU()
+                      (dropout): Dropout(p=0.0, inplace=False)
+                      (w2): Linear(in_features=2048, out_features=512, bias=True)
+                    )
+                  )
+                )
+              )
+            )
+            (2): ReversibleBlock(
+              (f): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): LSHSelfAttention(
+                    (toqk): Linear(in_features=512, out_features=512, bias=False)
+                    (tov): Linear(in_features=512, out_features=512, bias=False)
+                    (to_out): Linear(in_features=512, out_features=512, bias=True)
+                    (lsh_attn): LSHAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                      (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                    )
+                    (full_attn): FullQKAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                    (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                    (local_attn): LocalAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                  )
+                )
+              )
+              (g): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): Chunk(
+                    (fn): FeedForward(
+                      (w1): Linear(in_features=512, out_features=2048, bias=True)
+                      (act): GELU()
+                      (dropout): Dropout(p=0.0, inplace=False)
+                      (w2): Linear(in_features=2048, out_features=512, bias=True)
+                    )
+                  )
+                )
+              )
+            )
+            (3): ReversibleBlock(
+              (f): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): LSHSelfAttention(
+                    (toqk): Linear(in_features=512, out_features=512, bias=False)
+                    (tov): Linear(in_features=512, out_features=512, bias=False)
+                    (to_out): Linear(in_features=512, out_features=512, bias=True)
+                    (lsh_attn): LSHAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                      (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                    )
+                    (full_attn): FullQKAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                    (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                    (local_attn): LocalAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                  )
+                )
+              )
+              (g): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): Chunk(
+                    (fn): FeedForward(
+                      (w1): Linear(in_features=512, out_features=2048, bias=True)
+                      (act): GELU()
+                      (dropout): Dropout(p=0.0, inplace=False)
+                      (w2): Linear(in_features=2048, out_features=512, bias=True)
+                    )
+                  )
+                )
+              )
+            )
+            (4): ReversibleBlock(
+              (f): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): LSHSelfAttention(
+                    (toqk): Linear(in_features=512, out_features=512, bias=False)
+                    (tov): Linear(in_features=512, out_features=512, bias=False)
+                    (to_out): Linear(in_features=512, out_features=512, bias=True)
+                    (lsh_attn): LSHAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                      (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                    )
+                    (full_attn): FullQKAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                    (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                    (local_attn): LocalAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                  )
+                )
+              )
+              (g): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): Chunk(
+                    (fn): FeedForward(
+                      (w1): Linear(in_features=512, out_features=2048, bias=True)
+                      (act): GELU()
+                      (dropout): Dropout(p=0.0, inplace=False)
+                      (w2): Linear(in_features=2048, out_features=512, bias=True)
+                    )
+                  )
+                )
+              )
+            )
+            (5): ReversibleBlock(
+              (f): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): LSHSelfAttention(
+                    (toqk): Linear(in_features=512, out_features=512, bias=False)
+                    (tov): Linear(in_features=512, out_features=512, bias=False)
+                    (to_out): Linear(in_features=512, out_features=512, bias=True)
+                    (lsh_attn): LSHAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                      (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                    )
+                    (full_attn): FullQKAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                    (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                    (local_attn): LocalAttention(
+                      (dropout): Dropout(p=0.1, inplace=False)
+                    )
+                  )
+                )
+              )
+              (g): Deterministic(
+                (net): PreNorm(
+                  (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                  (fn): Chunk(
+                    (fn): FeedForward(
+                      (w1): Linear(in_features=512, out_features=2048, bias=True)
+                      (act): GELU()
+                      (dropout): Dropout(p=0.0, inplace=False)
+                      (w2): Linear(in_features=2048, out_features=512, bias=True)
+                    )
+                  )
+                )
+              )
+            )
+          )
+          (irrev_blocks): ModuleList(
+            (0): IrreversibleBlock(
+              (f): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): LSHSelfAttention(
+                  (toqk): Linear(in_features=512, out_features=512, bias=False)
+                  (tov): Linear(in_features=512, out_features=512, bias=False)
+                  (to_out): Linear(in_features=512, out_features=512, bias=True)
+                  (lsh_attn): LSHAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                  )
+                  (full_attn): FullQKAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                  (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                  (local_attn): LocalAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+              )
+              (g): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): Chunk(
+                  (fn): FeedForward(
+                    (w1): Linear(in_features=512, out_features=2048, bias=True)
+                    (act): GELU()
+                    (dropout): Dropout(p=0.0, inplace=False)
+                    (w2): Linear(in_features=2048, out_features=512, bias=True)
+                  )
+                )
+              )
+            )
+            (1): IrreversibleBlock(
+              (f): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): LSHSelfAttention(
+                  (toqk): Linear(in_features=512, out_features=512, bias=False)
+                  (tov): Linear(in_features=512, out_features=512, bias=False)
+                  (to_out): Linear(in_features=512, out_features=512, bias=True)
+                  (lsh_attn): LSHAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                  )
+                  (full_attn): FullQKAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                  (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                  (local_attn): LocalAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+              )
+              (g): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): Chunk(
+                  (fn): FeedForward(
+                    (w1): Linear(in_features=512, out_features=2048, bias=True)
+                    (act): GELU()
+                    (dropout): Dropout(p=0.0, inplace=False)
+                    (w2): Linear(in_features=2048, out_features=512, bias=True)
+                  )
+                )
+              )
+            )
+            (2): IrreversibleBlock(
+              (f): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): LSHSelfAttention(
+                  (toqk): Linear(in_features=512, out_features=512, bias=False)
+                  (tov): Linear(in_features=512, out_features=512, bias=False)
+                  (to_out): Linear(in_features=512, out_features=512, bias=True)
+                  (lsh_attn): LSHAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                  )
+                  (full_attn): FullQKAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                  (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                  (local_attn): LocalAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+              )
+              (g): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): Chunk(
+                  (fn): FeedForward(
+                    (w1): Linear(in_features=512, out_features=2048, bias=True)
+                    (act): GELU()
+                    (dropout): Dropout(p=0.0, inplace=False)
+                    (w2): Linear(in_features=2048, out_features=512, bias=True)
+                  )
+                )
+              )
+            )
+            (3): IrreversibleBlock(
+              (f): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): LSHSelfAttention(
+                  (toqk): Linear(in_features=512, out_features=512, bias=False)
+                  (tov): Linear(in_features=512, out_features=512, bias=False)
+                  (to_out): Linear(in_features=512, out_features=512, bias=True)
+                  (lsh_attn): LSHAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                  )
+                  (full_attn): FullQKAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                  (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                  (local_attn): LocalAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+              )
+              (g): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): Chunk(
+                  (fn): FeedForward(
+                    (w1): Linear(in_features=512, out_features=2048, bias=True)
+                    (act): GELU()
+                    (dropout): Dropout(p=0.0, inplace=False)
+                    (w2): Linear(in_features=2048, out_features=512, bias=True)
+                  )
+                )
+              )
+            )
+            (4): IrreversibleBlock(
+              (f): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): LSHSelfAttention(
+                  (toqk): Linear(in_features=512, out_features=512, bias=False)
+                  (tov): Linear(in_features=512, out_features=512, bias=False)
+                  (to_out): Linear(in_features=512, out_features=512, bias=True)
+                  (lsh_attn): LSHAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                  )
+                  (full_attn): FullQKAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                  (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                  (local_attn): LocalAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+              )
+              (g): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): Chunk(
+                  (fn): FeedForward(
+                    (w1): Linear(in_features=512, out_features=2048, bias=True)
+                    (act): GELU()
+                    (dropout): Dropout(p=0.0, inplace=False)
+                    (w2): Linear(in_features=2048, out_features=512, bias=True)
+                  )
+                )
+              )
+            )
+            (5): IrreversibleBlock(
+              (f): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): LSHSelfAttention(
+                  (toqk): Linear(in_features=512, out_features=512, bias=False)
+                  (tov): Linear(in_features=512, out_features=512, bias=False)
+                  (to_out): Linear(in_features=512, out_features=512, bias=True)
+                  (lsh_attn): LSHAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                    (dropout_for_hash): Dropout(p=0.0, inplace=False)
+                  )
+                  (full_attn): FullQKAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                  (post_attn_dropout): Dropout(p=0.0, inplace=False)
+                  (local_attn): LocalAttention(
+                    (dropout): Dropout(p=0.1, inplace=False)
+                  )
+                )
+              )
+              (g): PreNorm(
+                (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+                (fn): Chunk(
+                  (fn): FeedForward(
+                    (w1): Linear(in_features=512, out_features=2048, bias=True)
+                    (act): GELU()
+                    (dropout): Dropout(p=0.0, inplace=False)
+                    (w2): Linear(in_features=2048, out_features=512, bias=True)
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+      (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (out): Sequential(
+        (0): Identity()
+        (1): Linear(in_features=512, out_features=256, bias=True)
+      )
+    )
+  )
+)
